@@ -7,7 +7,8 @@ import sys
 import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
-spec = importlib.util.spec_from_file_location('readonly', ROOT / 'readonly.py')
+sys.path.insert(0, str(ROOT / 'src'))
+spec = importlib.util.spec_from_file_location('readonly', ROOT / 'src' / 'readonly.py')
 app = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(app)
 
@@ -46,7 +47,7 @@ class ReadOnlyTests(unittest.TestCase):
             {'jsonrpc': '2.0', 'method': 'notifications/initialized'},
             {'jsonrpc': '2.0', 'id': 2, 'method': 'tools/list'},
             {'jsonrpc': '2.0', 'id': 3, 'method': 'tools/call', 'params': {'name': 'fun001_status'}}]
-        result = subprocess.run([sys.executable, str(ROOT / 'readonly.py'), 'mcp'],
+        result = subprocess.run([sys.executable, str(ROOT / 'src' / 'readonly.py'), 'mcp'],
                                 input='\ufeff' + '\n'.join(json.dumps(r) for r in requests) + '\n{bad}\n',
                                 capture_output=True, encoding='utf-8', timeout=10, check=True)
         replies = [json.loads(line) for line in result.stdout.splitlines()]

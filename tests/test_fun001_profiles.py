@@ -6,7 +6,7 @@ import tempfile
 import unittest
 from unittest.mock import MagicMock, patch
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'src'))
 from fun001_core import ControlRejected, RealSafetyController, VERIFIED_ENVELOPE
 from fun001_protocol import FUNCTIONS, MODE_NAMES, build_control_frame, build_stop_frames
 from fun001_service import ControlClient, ControlServer, ControlState, parse_grant, sustained_level

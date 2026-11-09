@@ -9,7 +9,7 @@ import time
 import unittest
 from unittest.mock import MagicMock, patch
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'src'))
 from fun001_core import ControlRejected, RealSafetyController, UnknownExecution
 from fun001_protocol import FUNCTIONS, build_state_frames, build_stop_frames
 from fun001_service import ControlState, ControlServer, ControlClient, parse_grant, sustained_state
@@ -345,7 +345,7 @@ class CombinedInterfaceTests(unittest.TestCase):
                       'from fun001_mcp import serve\nclient=ControlClient(sys.argv[1])\n'
                       'try:\n    serve(client)\nfinally:\n    client.close()\n')
             process = subprocess.Popen([sys.executable, '-B', '-c', script, str(server.directory)],
-                                       cwd=Path(__file__).resolve().parents[1], text=True,
+                                       cwd=Path(__file__).resolve().parents[1] / 'src', text=True,
                                        encoding='utf-8', stdin=subprocess.PIPE,
                                        stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             def send(identifier, name, arguments):

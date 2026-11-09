@@ -21,7 +21,7 @@ import fun001_mcp
 from fun001_service import ControlClient
 from local_runtime import RuntimeLock, read_secret, secure_directory, write_private
 
-RUNTIME = Path(__file__).resolve().parent / 'private' / 'http-mcp'
+RUNTIME = Path(__file__).resolve().parents[1] / 'private' / 'http-mcp'
 CREDENTIAL = 'FUN001_HTTP_TOKEN'
 PORT = 8769
 HOSTS = ('127.0.0.1:8769', '127.0.0.1:18769')

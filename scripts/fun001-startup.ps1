@@ -3,8 +3,9 @@ param(
     [string]$Action = 'status'
 )
 $ErrorActionPreference = 'Stop'
-$runtime = Join-Path $PSScriptRoot 'private\startup'
-$launcher = Join-Path $PSScriptRoot 'launch-fun001-stack.vbs'
+$projectRoot = Split-Path -Parent $PSScriptRoot
+$runtime = Join-Path $projectRoot 'private\startup'
+$launcher = Join-Path $projectRoot 'scripts\launch-fun001-stack.vbs'
 $startupEntry = Join-Path ([Environment]::GetFolderPath('Startup')) 'launch-fun001-stack.vbs'
 if ($Action -eq 'disable') {
     if (Test-Path -LiteralPath $startupEntry) {
@@ -17,10 +18,17 @@ if ($Action -eq 'disable') {
     exit 0
 }
 if ($Action -eq 'install') {
-    $python = Join-Path $PSScriptRoot '.venv\Scripts\python.exe'
-    Push-Location $PSScriptRoot
+    $python = Join-Path $projectRoot '.venv\Scripts\python.exe'
+    Push-Location $projectRoot
     try {
-        & $python -B -c 'from pathlib import Path; from local_runtime import secure_directory; secure_directory(Path("private/startup"))'
+        $prepareDirectory = @'
+import sys
+from pathlib import Path
+sys.path.insert(0, 'src')
+from local_runtime import secure_directory
+secure_directory(Path('private/startup'))
+'@
+        & $python -B -c $prepareDirectory
         if ($LASTEXITCODE -ne 0) { throw 'Cannot secure startup runtime directory.' }
     } finally { Pop-Location }
     if (Test-Path -LiteralPath $startupEntry) {
@@ -29,7 +37,7 @@ if ($Action -eq 'install') {
         }
     }
     $installedLauncher = (Get-Content -Raw -LiteralPath $launcher).Replace(
-        'root = ""', ('root = "' + $PSScriptRoot.Replace('"', '""') + '"'))
+        'root = ""', ('root = "' + $projectRoot.Replace('"', '""') + '"'))
     Set-Content -LiteralPath $startupEntry -Value $installedLauncher -Encoding Unicode
     Write-Host 'FUNF login startup installed.'
 }
@@ -47,9 +55,9 @@ foreach ($component in @('control', 'gateway', 'tunnel')) {
         $running = $supervisor -and $supervisor.StartTime.ToUniversalTime() -eq ([datetime]$state.supervisor_started).ToUniversalTime()
     }
     $configured = switch ($component) {
-        'control' { Test-Path -LiteralPath (Join-Path $PSScriptRoot 'private\device\binding.json') }
-        'gateway' { Test-Path -LiteralPath (Join-Path $PSScriptRoot 'private\http-mcp\.env') }
-        'tunnel' { Test-Path -LiteralPath (Join-Path $PSScriptRoot 'private\tunnel.json') }
+        'control' { Test-Path -LiteralPath (Join-Path $projectRoot 'private\device\binding.json') }
+        'gateway' { Test-Path -LiteralPath (Join-Path $projectRoot 'private\http-mcp\.env') }
+        'tunnel' { Test-Path -LiteralPath (Join-Path $projectRoot 'private\tunnel.json') }
     }
     [PSCustomObject]@{ Component = $component; Configured = [bool]$configured; SupervisorRunning = [bool]$running }
 }

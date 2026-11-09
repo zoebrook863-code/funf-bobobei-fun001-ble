@@ -10,7 +10,7 @@ import unittest
 from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT))
+sys.path.insert(0, str(ROOT / 'src'))
 from device_safety import NONZERO_BLOCK_REASON
 from fun001_core import ControlRejected, LinkUnavailable, SCOPE, UnknownExecution
 from fun001_protocol import build_control_frame, build_stop_frames
@@ -361,7 +361,7 @@ class ControlServerIntegrationTests(unittest.TestCase):
                   'try:\n    fun001_mcp.serve(client)\n'
                   'finally:\n    client.close()\n')
         process = subprocess.Popen([sys.executable, '-B', '-c', script, str(self.directory)],
-                                   cwd=ROOT, stdin=subprocess.PIPE, stdout=subprocess.PIPE,
+                                   cwd=ROOT / 'src', stdin=subprocess.PIPE, stdout=subprocess.PIPE,
                                    stderr=subprocess.PIPE, text=True, encoding='utf-8')
         def send(identifier, name, arguments):
             process.stdin.write(json.dumps({'jsonrpc': '2.0', 'id': identifier,
@@ -424,7 +424,7 @@ class ControlLifecycleTests(unittest.TestCase):
             {'jsonrpc': '2.0', 'id': 1, 'method': 'initialize',
              'params': {'protocolVersion': '2025-06-18'}},
             {'jsonrpc': '2.0', 'id': 2, 'method': 'tools/list'}]
-        result = subprocess.run([sys.executable, str(ROOT / 'fun001_mcp.py')],
+        result = subprocess.run([sys.executable, str(ROOT / 'src' / 'fun001_mcp.py')],
                                 input='\n'.join(json.dumps(request) for request in requests) + '\n',
                                 capture_output=True, encoding='utf-8', timeout=10, check=True)
         replies = [json.loads(line) for line in result.stdout.splitlines()]

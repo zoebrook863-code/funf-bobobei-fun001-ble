@@ -4,7 +4,7 @@ import tempfile
 from types import SimpleNamespace
 import unittest
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'src'))
 from ble_readonly import inspect_bound_device, load_binding
 from fun001_protocol import SERVICE_UUID, WRITE_UUID, NOTIFY_UUID
 

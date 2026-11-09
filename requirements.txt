@@ -1,2 +1,2 @@
--r requirements-ble.txt
--r requirements-http.txt
+-r requirements/ble.txt
+-r requirements/http.txt

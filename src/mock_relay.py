@@ -12,7 +12,7 @@ from local_runtime import (LoopbackClient, LoopbackServer, RuntimeLock,
                            RequestRejected, secure_directory, write_private)
 from mock_control import ControlRejected, MockSafetyController, MockTransport
 
-RUNTIME = Path(__file__).resolve().parent / 'private' / 'mock-relay'
+RUNTIME = Path(__file__).resolve().parents[1] / 'private' / 'mock-relay'
 DEFAULT_PORT = 18761
 SCOPE = 'semantic_mock_only'
 ACTIONS = {

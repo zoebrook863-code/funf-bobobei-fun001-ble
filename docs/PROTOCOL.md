@@ -15,4 +15,4 @@
 
 模式1–4对应Gentle Foreplay、Flirt & Heat Up、Constant Waves、Wild Climax。名称对应关系来自App资源，实际时序尚待测量。
 
-归零编码与测试样本见fun001_protocol.py及tests/fixtures/zero_capture.json。协议编码、ATT应答与物理行为分别验收，硬件范围见[安全说明](SAFETY.md)。
+归零编码与测试样本见src/fun001_protocol.py及tests/fixtures/zero_capture.json。协议编码、ATT应答与物理行为分别验收，硬件范围见[安全说明](SAFETY.md)。

@@ -9,7 +9,7 @@ BLE服务运行在设备附近的Windows电脑。MCP客户端可以在同机使�
 ```toml
 [mcp_servers.fun001-local-control]
 command = "C:/path/to/project/.venv/Scripts/python.exe"
-args = ["-B", "C:/path/to/project/fun001_mcp.py"]
+args = ["-B", "C:/path/to/project/src/fun001_mcp.py"]
 startup_timeout_sec = 15
 tool_timeout_sec = 330
 enabled = true

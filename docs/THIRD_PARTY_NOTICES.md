@@ -4,7 +4,7 @@
 
 ## FUNF Pro relay
 
-[zaoan0/funf-pro-relay](https://github.com/zaoan0/funf-pro-relay)提供了FUNF中继架构、授权、停止和设备持有者流程的参考。上游采用MIT许可证，原许可文本保存在[licenses/funf-pro-relay-MIT.txt](licenses/funf-pro-relay-MIT.txt)。
+[zaoan0/funf-pro-relay](https://github.com/zaoan0/funf-pro-relay)提供了FUNF中继架构、授权、停止和设备持有者流程的参考。上游采用MIT许可证，原许可文本保存在[licenses/funf-pro-relay-MIT.txt](../licenses/funf-pro-relay-MIT.txt)。
 
 本项目的目标是FUN-001非Pro，协议封装与控制语义根据该型号的本地App及通信证据复核，采用Windows本机BLE路径。
 
@@ -20,4 +20,4 @@
 
 Python依赖通过requirements文件安装，各依赖的许可信息随其发行包提供。
 
-项目代码的MIT许可见[LICENSE](LICENSE)。官方App素材、原始通信记录和用户设备资料由各自权利人与使用者管理。
+项目代码的MIT许可见[LICENSE](../LICENSE)。官方App素材、原始通信记录和用户设备资料由各自权利人与使用者管理。

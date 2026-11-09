@@ -8,7 +8,7 @@ from device_safety import (NONZERO_BLOCK_REASON, live_nonzero_allowed,
 
 from fun001_protocol import MODE_NAMES
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parents[1] / 'docs'
 DOCUMENTS = {'audit': 'AUDIT.md', 'guide': 'READONLY_BLE_GUIDE.md',
              'plan': 'IMPLEMENTATION_PLAN.md'}
 VERSIONS = ('2024-11-05', '2025-03-26', '2025-06-18')
@@ -39,12 +39,12 @@ def status():
             'real_write_enabled': live_nonzero_allowed(),
             'session_authorization': 'absent',
             'relay_deployed': False, 'mcp_scope': 'local_stdio_and_optional_authenticated_http',
-            'mock_relay_available': True, 'mock_mcp_entrypoint': 'mock_mcp.py',
-            'local_control_entrypoint': 'fun001_service.py',
-            'local_mcp_entrypoint': 'fun001_mcp.py',
+            'mock_relay_available': True, 'mock_mcp_entrypoint': 'src/mock_mcp.py',
+            'local_control_entrypoint': 'src/fun001_service.py',
+            'local_mcp_entrypoint': 'src/fun001_mcp.py',
             'local_control_scope': 'real_local_ble',
             'local_control_real_device_verified': True,
-            'phase1_diagnostics_entrypoint': 'diagnostics_phase1.py',
+            'phase1_diagnostics_entrypoint': 'src/diagnostics_phase1.py',
             'remote_scope': 'optional_user_configured_http',
             'mock_scope': 'semantic_mock_only'}
 

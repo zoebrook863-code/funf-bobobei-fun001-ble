@@ -6,7 +6,7 @@ import re
 
 from fun001_protocol import NOTIFY_UUID, SERVICE_UUID, WRITE_UUID
 
-BINDING_FILE = Path(__file__).resolve().parent / 'private' / 'device' / 'binding.json'
+BINDING_FILE = Path(__file__).resolve().parents[1] / 'private' / 'device' / 'binding.json'
 
 
 def load_binding(path=BINDING_FILE):

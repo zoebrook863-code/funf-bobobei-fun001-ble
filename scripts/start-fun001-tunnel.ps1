@@ -1,6 +1,7 @@
 param([switch]$Check)
 $ErrorActionPreference = 'Stop'
-$configPath = Join-Path $PSScriptRoot 'private\tunnel.json'
+$projectRoot = Split-Path -Parent $PSScriptRoot
+$configPath = Join-Path $projectRoot 'private\tunnel.json'
 $config = Get-Content -Raw -LiteralPath $configPath | ConvertFrom-Json
 if (@($config.PSObject.Properties.Name).Count -ne 2 -or
     -not ($config.PSObject.Properties.Name -contains 'ssh_target') -or

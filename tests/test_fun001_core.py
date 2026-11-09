@@ -4,7 +4,7 @@ import sys
 import threading
 import unittest
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'src'))
 from fun001_core import (ES_CONTINUOUS, ES_SYSTEM_REQUIRED, MAX_GRANT_SECONDS,
                          ControlRejected, LinkUnavailable, RealSafetyController,
                          SleepGuard, UnknownExecution)

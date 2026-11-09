@@ -4,8 +4,9 @@ param(
     [string]$Component
 )
 $ErrorActionPreference = 'Stop'
-$python = Join-Path $PSScriptRoot '.venv\Scripts\python.exe'
-$runtime = Join-Path $PSScriptRoot 'private\startup'
+$projectRoot = Split-Path -Parent $PSScriptRoot
+$python = Join-Path $projectRoot '.venv\Scripts\python.exe'
+$runtime = Join-Path $projectRoot 'private\startup'
 $identity = [System.Security.Principal.WindowsIdentity]::GetCurrent().User.Value
 $mutex = New-Object System.Threading.Mutex($false, "Local\FUN001-$identity-$Component")
 $owned = $false
@@ -30,7 +31,7 @@ try {
     if ($Component -eq 'control') {
         $Host.UI.RawUI.WindowTitle = 'FUNF owner console'
         while ($true) {
-            & $python -B (Join-Path $PSScriptRoot 'fun001_service.py') serve
+            & $python -B (Join-Path $projectRoot 'src\fun001_service.py') serve
             if ($LASTEXITCODE -eq 0) { break }
             Write-Host 'Control service exited. Restarting in 5 seconds with a fresh authorization state.'
             Start-Sleep -Seconds 5
@@ -43,7 +44,7 @@ try {
     if ($previous -and $previous.child_pid) {
         $candidates += @{ id = $previous.child_pid; started = $previous.child_started }
     }
-    $legacyPath = Join-Path $PSScriptRoot 'private\http-mcp\processes.json'
+    $legacyPath = Join-Path $projectRoot 'private\http-mcp\processes.json'
     if (Test-Path -LiteralPath $legacyPath) {
         $legacy = Get-Content -Raw -LiteralPath $legacyPath | ConvertFrom-Json
         $pidField = $Component + '_pid'
@@ -63,11 +64,11 @@ try {
                 $outputLog = Join-Path $runtime "$Component-out.log"
                 $errorLog = Join-Path $runtime "$Component-error.log"
                 if ($Component -eq 'gateway') {
-                    $child = Start-Process -FilePath $python -ArgumentList @('-B', 'fun001_http.py', 'serve') `
-                        -WorkingDirectory $PSScriptRoot -WindowStyle Hidden -PassThru `
+                    $child = Start-Process -FilePath $python -ArgumentList @('-B', 'src\fun001_http.py', 'serve') `
+                        -WorkingDirectory $projectRoot -WindowStyle Hidden -PassThru `
                         -RedirectStandardOutput $outputLog -RedirectStandardError $errorLog
                 } else {
-                    $tunnelScript = Join-Path $PSScriptRoot 'start-fun001-tunnel.ps1'
+                    $tunnelScript = Join-Path $projectRoot 'scripts\start-fun001-tunnel.ps1'
                     $child = Start-Process -FilePath 'powershell.exe' -ArgumentList @(
                         '-NoProfile', '-ExecutionPolicy', 'Bypass', '-File',
                         ('"' + $tunnelScript + '"')) -WindowStyle Hidden -PassThru `

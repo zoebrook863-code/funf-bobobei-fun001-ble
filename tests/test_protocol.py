@@ -3,7 +3,7 @@ import json
 import sys
 import unittest
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'src'))
 from fun001_protocol import (_packetize, build_control_frame, build_init_frame,
                              build_observed_pause_frame, build_state_frames,
                              build_stop_frames)

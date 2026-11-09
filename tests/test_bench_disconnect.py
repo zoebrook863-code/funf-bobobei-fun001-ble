@@ -8,7 +8,7 @@ import unittest
 from unittest.mock import AsyncMock, patch
 
 ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT))
+sys.path.insert(0, str(ROOT / 'src'))
 from bench_disconnect import bench_disconnect
 from fun001_protocol import WRITE_UUID, NOTIFY_UUID
 
@@ -158,7 +158,7 @@ class BenchDisconnectTests(unittest.IsolatedAsyncioTestCase):
         self.assertFalse(any(isinstance(event, tuple) for event in self.events))
 
     def test_worker_does_not_accept_zero_test_confirmation(self):
-        result = subprocess.run([sys.executable, str(ROOT / 'bench_stop.py'), '--disconnect-worker'],
+        result = subprocess.run([sys.executable, str(ROOT / 'src' / 'bench_stop.py'), '--disconnect-worker'],
                                 input=json.dumps({'confirmation': '是'}), capture_output=True,
                                 encoding='utf-8', timeout=5, check=True)
         self.assertEqual(json.loads(result.stdout)['status'], 'confirmation_required')

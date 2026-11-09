@@ -5,7 +5,7 @@ import sys
 import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT))
+sys.path.insert(0, str(ROOT / 'src'))
 from bench_disconnect import bench_disconnect
 from bench_stop import bench_vibration
 from device_safety import live_nonzero_allowed, nonzero_bench_allowed
@@ -34,7 +34,7 @@ class LiveSafetyLockTests(unittest.IsolatedAsyncioTestCase):
                                      ('--pulse-worker', '震动1'),
                                      ('--disconnect-worker', '断连1')):
             with self.subTest(action=action):
-                result = subprocess.run([sys.executable, str(ROOT / 'bench_stop.py'), action],
+                result = subprocess.run([sys.executable, str(ROOT / 'src' / 'bench_stop.py'), action],
                                         input=json.dumps({'confirmation': confirmation}),
                                         capture_output=True, encoding='utf-8', timeout=5, check=True)
                 payload = json.loads(result.stdout)

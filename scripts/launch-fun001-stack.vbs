@@ -2,8 +2,8 @@
 Set fs = CreateObject("Scripting.FileSystemObject")
 Set sh = CreateObject("WScript.Shell")
 root = ""
-If Len(root) = 0 Then root = fs.GetParentFolderName(WScript.ScriptFullName)
-script = fs.BuildPath(root, "start-fun001-component.ps1")
+If Len(root) = 0 Then root = fs.GetParentFolderName(fs.GetParentFolderName(WScript.ScriptFullName))
+script = fs.BuildPath(root, "scripts\start-fun001-component.ps1")
 base = "powershell.exe -NoProfile -ExecutionPolicy Bypass -File " & Chr(34) & script & Chr(34)
 If WScript.Arguments.Named.Exists("check") Then
     WScript.Echo base

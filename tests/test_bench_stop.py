@@ -8,7 +8,7 @@ import unittest
 from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT))
+sys.path.insert(0, str(ROOT / 'src'))
 from bench_stop import bench_vibration, bench_zero
 from fun001_protocol import WRITE_UUID, NOTIFY_UUID
 
@@ -146,13 +146,13 @@ class BenchStopTests(unittest.IsolatedAsyncioTestCase):
         self.assertFalse(result['stop_ack_received'])
 
     def test_cli_cancellation_never_starts_worker(self):
-        result = subprocess.run([sys.executable, str(ROOT / 'bench_stop.py')],
+        result = subprocess.run([sys.executable, str(ROOT / 'src' / 'bench_stop.py')],
                                 input='否\n', capture_output=True, encoding='utf-8',
                                 timeout=5, check=True)
         self.assertIn('cancelled', result.stdout)
 
     def test_worker_requires_confirmation(self):
-        result = subprocess.run([sys.executable, str(ROOT / 'bench_stop.py'), '--worker'],
+        result = subprocess.run([sys.executable, str(ROOT / 'src' / 'bench_stop.py'), '--worker'],
                                 input=json.dumps({'confirmation': '否'}), capture_output=True,
                                 encoding='utf-8', timeout=5, check=True)
         self.assertEqual(json.loads(result.stdout)['status'], 'confirmation_required')

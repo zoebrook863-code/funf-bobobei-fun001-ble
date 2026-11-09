@@ -24,7 +24,7 @@ from fun001_protocol import FUNCTIONS, MODE_NAMES
 from local_runtime import LoopbackClient, LoopbackServer, RequestRejected
 from standing_permit import CHANNELS, StandingPermit
 
-RUNTIME = Path(__file__).resolve().parent / 'private' / 'control'
+RUNTIME = Path(__file__).resolve().parents[1] / 'private' / 'control'
 DEFAULT_PORT = 18762
 CREDENTIAL = 'FUN001_API_TOKEN'
 ACTIONS = {

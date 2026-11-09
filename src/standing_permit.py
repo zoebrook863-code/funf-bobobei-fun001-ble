@@ -6,7 +6,7 @@ import threading
 
 from local_runtime import secure_directory, write_private
 
-DIRECTORY = Path(__file__).resolve().parent / 'private' / 'standing-control'
+DIRECTORY = Path(__file__).resolve().parents[1] / 'private' / 'standing-control'
 CHANNELS = {
     'suction': {'cap': 1, 'modes': [1]},
     'vibration': {'cap': 1, 'modes': [1]},

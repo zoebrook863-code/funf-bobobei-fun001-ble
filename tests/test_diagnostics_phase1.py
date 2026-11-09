@@ -5,7 +5,7 @@ import sys
 import tempfile
 import unittest
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'src'))
 import diagnostics_phase1 as diagnostics
 from diagnostics_phase1 import (MeasurementSession, WorkerResult, summarize)
 from fun001_protocol import NOTIFY_UUID, SERVICE_UUID, WRITE_UUID

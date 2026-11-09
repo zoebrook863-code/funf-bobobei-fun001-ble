@@ -9,7 +9,7 @@ import time
 import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT))
+sys.path.insert(0, str(ROOT / 'src'))
 from mock_control import ControlRejected
 from mock_relay import MockRelayClient, MockRelayServer, MockRelayState
 import mock_mcp
@@ -255,7 +255,7 @@ class MockRelayLifecycleTests(unittest.TestCase):
             {'jsonrpc': '2.0', 'id': 1, 'method': 'initialize',
              'params': {'protocolVersion': '2025-06-18'}},
             {'jsonrpc': '2.0', 'id': 2, 'method': 'tools/list'}]
-        result = subprocess.run([sys.executable, str(ROOT / 'mock_mcp.py')],
+        result = subprocess.run([sys.executable, str(ROOT / 'src' / 'mock_mcp.py')],
                                 input='\n'.join(json.dumps(r) for r in requests) + '\n',
                                 capture_output=True, encoding='utf-8', timeout=10, check=True)
         replies = [json.loads(line) for line in result.stdout.splitlines()]

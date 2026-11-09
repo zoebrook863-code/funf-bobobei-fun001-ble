@@ -28,7 +28,7 @@ import time
 from ble_readonly import load_binding, verified_write_characteristic
 from local_runtime import secure_directory
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parents[1]
 DIAGNOSTICS = ROOT / 'private' / 'diagnostics'
 CONFIRMATION = '断连测量'
 MODES = ('A', 'B', 'C', 'D', 'E')

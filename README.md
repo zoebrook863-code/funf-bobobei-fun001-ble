@@ -4,7 +4,21 @@
 
 > **重要风险**
 >
-> 单台实测设备在 BLE 断链后持续动作，观察至断链后约10秒仍在运行，最后通过物理关机停止。软件停止依赖进程存活、可用的蓝牙链路和成功写入。使用者需要能立即触及设备电源键。初次验证请取下设备、放在桌面进行。完整边界见[安全与实测范围](SAFETY.md)。
+> 单台实测设备在 BLE 断链后持续动作，观察至断链后约10秒仍在运行，最后通过物理关机停止。软件停止依赖进程存活、可用的蓝牙链路和成功写入。使用者需要能立即触及设备电源键。初次验证请取下设备、放在桌面进行。完整边界见[安全与实测范围](docs/SAFETY.md)。
+
+## 目录
+
+```text
+fun001.ps1       PowerShell 统一入口
+src/             控制服务、BLE 与 MCP 实现
+scripts/         登录启动与可选连接脚本
+docs/            使用指南、协议、风险与致谢
+tests/           假设备回归测试
+requirements/    依赖清单
+examples/        通用配置示例
+tools/           发布前隐私检查
+licenses/        第三方许可证
+```
 
 ## 架构
 
@@ -45,7 +59,7 @@ python -m venv .venv
 .\fun001.ps1 setup
 ```
 
-setup 隐藏输入本人设备的完整 BLE 地址，将绑定保存到仅当前用户可访问的 private 目录。绑定步骤只保存地址。地址可通过本人官方 App 或 nRF Connect 的只读扫描获得，步骤见[只读设备发现](READONLY_BLE_GUIDE.md)。
+setup 隐藏输入本人设备的完整 BLE 地址，将绑定保存到仅当前用户可访问的 private 目录。绑定步骤只保存地址。地址可通过本人官方 App 或 nRF Connect 的只读扫描获得，步骤见[只读设备发现](docs/READONLY_BLE_GUIDE.md)。
 
 设备放在桌面并开机，结束手机上占用设备的连接，然后启动控制台。
 
@@ -62,21 +76,21 @@ stop
 quit
 ```
 
-详细参数、单路与组合语义见[控制指南](CONTROL_GUIDE.md)。
+详细参数、单路与组合语义见[控制指南](docs/CONTROL_GUIDE.md)。
 
 ## MCP
 
 本机 stdio MCP 由客户端启动以下程序，BLE 仍由单独运行的控制服务持有。
 
 ```powershell
-.\.venv\Scripts\python.exe -B .\fun001_mcp.py
+.\.venv\Scripts\python.exe -B .\src\fun001_mcp.py
 ```
 
 工具包含 status、project_status、project_audit、set_intensity、set_state、run_seconds、run_state_seconds、heartbeat、stop、emergency_stop、release_control，共11项。
 
 定时输出使用 run_seconds 或 run_state_seconds，单次1–300秒，完成后尝试归零。普通设置的 TTL 最大1秒。本机许可决定通道、模式和强度上限，MCP按该范围执行。
 
-客户端配置与认证 HTTP 入口见[HTTP MCP说明](HTTP_MCP_GUIDE.md)。HTTP地址由使用者自行部署认证转发后获得。
+客户端配置与认证 HTTP 入口见[HTTP MCP说明](docs/HTTP_MCP_GUIDE.md)。HTTP地址由使用者自行部署认证转发后获得。
 
 ## 常态许可与登录自启动
 
@@ -97,7 +111,7 @@ quit
 .\fun001.ps1 startup-disable
 ```
 
-登录启动项默认打开最小化的本机授权控制台。HTTP凭据已初始化时启动网关，私人隧道配置存在时启动可选连接通道。进程退出后按配置重试。具体流程见[启动说明](STARTUP_GUIDE.md)。
+登录启动项默认打开最小化的本机授权控制台。HTTP凭据已初始化时启动网关，私人隧道配置存在时启动可选连接通道。进程退出后按配置重试。具体流程见[启动说明](docs/STARTUP_GUIDE.md)。
 
 ## 测试
 
@@ -105,7 +119,7 @@ quit
 .\fun001.ps1 test
 ```
 
-测试使用假设备、临时运行目录和回环端口，覆盖协议、授权、时限、并发急停、未知结果、常态许可、MCP传输和安装配置。软件测试结果与硬件物理验收分别统计，见[测试说明](TESTING.md)。
+测试使用假设备、临时运行目录和回环端口，覆盖协议、授权、时限、并发急停、未知结果、常态许可、MCP传输和安装配置。软件测试结果与硬件物理验收分别统计，见[测试说明](docs/TESTING.md)。
 
 ## 参考与致谢
 
@@ -113,7 +127,7 @@ quit
 - SVAKOM BLE 逆向与本机 Python 中继方法的参考来源。[vickyldr/svakom-ble-ai](https://github.com/vickyldr/svakom-ble-ai)
 - 本地开发阶段检阅的 SVAKOM 控制示例，其 README 同时引用了上一项目。[daningzi50-hub/svakom-sl278h-ble](https://github.com/daningzi50-hub/svakom-sl278h-ble)
 
-本项目面向 FUN-001 非 Pro，协议编码依据该型号的本地 App 与通信证据复核，详见[协议说明](PROTOCOL.md)。参考范围和许可记录见[第三方说明](THIRD_PARTY_NOTICES.md)。
+本项目面向 FUN-001 非 Pro，协议编码依据该型号的本地 App 与通信证据复核，详见[协议说明](docs/PROTOCOL.md)。参考范围和许可记录见[第三方说明](docs/THIRD_PARTY_NOTICES.md)。
 
 ## 许可证与私人数据
 

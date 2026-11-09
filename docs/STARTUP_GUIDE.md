@@ -32,7 +32,7 @@ ssh_target支持SSH主机别名或user@hostname，remote_port范围1024–65535�
 下面的检查只验证本地配置并显示目标，分享输出前需要清除个人部署信息。
 
 ```powershell
-.\start-fun001-tunnel.ps1 -Check
+.\scripts\start-fun001-tunnel.ps1 -Check
 ```
 
 前台运行连接通道可直接执行start-fun001-tunnel.ps1。使用startup-start时，守护程序在子进程退出后约5秒重试。SSH保活为15秒、2次。系统网络环境与远端转发由使用者自行配置。

@@ -3,7 +3,7 @@ from pathlib import Path
 import sys
 import unittest
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'src'))
 import phase2_bench
 from fun001_protocol import (NOTIFY_UUID, SERVICE_UUID, WRITE_UUID,
                              build_control_frame, build_stop_frames)
