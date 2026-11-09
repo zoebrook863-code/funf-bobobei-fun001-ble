@@ -1,0 +1,2 @@
+-r requirements-ble.txt
+-r requirements-http.txt

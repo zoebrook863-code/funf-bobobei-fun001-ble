@@ -1,0 +1,4 @@
+{
+  "ssh_target": "user@example.invalid",
+  "remote_port": 18769
+}
