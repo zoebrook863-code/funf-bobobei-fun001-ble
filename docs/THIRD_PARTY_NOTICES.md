@@ -12,7 +12,7 @@
 
 [vickyldr/svakom-ble-ai](https://github.com/vickyldr/svakom-ble-ai)提供了SVAKOM BLE分析、本机Python中继与AI控制组织方式的参考。检查时未见其明确开源许可证声明。
 
-开发阶段直接检阅过[daningzi50-hub/svakom-sl278h-ble](https://github.com/daningzi50-hub/svakom-sl278h-ble)，其README明确引用上一项目，并声明MIT，根目录缺少独立LICENSE文件。该仓库还致谢了[buttplugio/stpihkal](https://github.com/buttplugio/stpihkal)。
+相关SVAKOM BLE控制示例见[daningzi50-hub/svakom-sl278h-ble](https://github.com/daningzi50-hub/svakom-sl278h-ble)，其README明确引用上一项目，并声明MIT，根目录缺少独立LICENSE文件。该仓库还致谢了[buttplugio/stpihkal](https://github.com/buttplugio/stpihkal)。
 
 这些SVAKOM项目在此作为设计与方法参考列出。当前发布清单分发本项目的FUN-001实现和测试。后续引入第三方源文件时，应单独核对授权范围并携带相应声明。
 

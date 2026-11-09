@@ -1,7 +1,7 @@
 """Phase-one disconnect forensics: passive observation and close timing.
 
-Two read-only tools and one parent orchestrator, per
-STOP_GUARANTEE_DIAGNOSIS_2026-11-08.md section 5:
+Two read-only tools and one parent orchestrator for the reviewed
+phase-one diagnostic procedure.
 
 * observe worker   - passive advertisements only, never connects.
 * close worker     - connects, discovers GATT, writes nothing, holds, then

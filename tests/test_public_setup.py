@@ -100,18 +100,18 @@ class PortableStartupTests(unittest.TestCase):
         self.assertIn(str(project / 'scripts' / 'start-fun001-component.ps1'), result.stdout)
 
     def test_tunnel_check_is_loopback_and_accepts_example(self):
-        result = self.check_tunnel({'ssh_target': 'user@example.invalid', 'remote_port': 18769})
+        result = self.check_tunnel({'ssh_target': 'user@example.invalid', 'remote_port': 38473})
         self.assertEqual(result.returncode, 0, result.stderr)
-        self.assertEqual(json.loads(result.stdout)['forward'], '127.0.0.1:18769:127.0.0.1:8769')
+        self.assertEqual(json.loads(result.stdout)['forward'], '127.0.0.1:38473:127.0.0.1:8769')
 
     def test_tunnel_rejects_ssh_options(self):
-        result = self.check_tunnel({'ssh_target': '-oProxyCommand=bad', 'remote_port': 18769})
+        result = self.check_tunnel({'ssh_target': '-oProxyCommand=bad', 'remote_port': 38473})
         self.assertNotEqual(result.returncode, 0)
 
     def test_tunnel_rejects_port_types_and_extra_fields(self):
-        for config in ({'ssh_target': 'example.invalid', 'remote_port': '18769'},
+        for config in ({'ssh_target': 'example.invalid', 'remote_port': '38473'},
                        {'ssh_target': 'example.invalid', 'remote_port': 1},
-                       {'ssh_target': 'example.invalid', 'remote_port': 18769, 'extra': True}):
+                       {'ssh_target': 'example.invalid', 'remote_port': 38473, 'extra': True}):
             with self.subTest(config=config):
                 self.assertNotEqual(self.check_tunnel(config).returncode, 0)
 

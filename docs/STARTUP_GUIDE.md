@@ -23,7 +23,7 @@ start立即启动组件，disable取消后续登录自启动。普通grant或per
 ```json
 {
   "ssh_target": "user@example.invalid",
-  "remote_port": 18769
+  "remote_port": 38473
 }
 ```
 

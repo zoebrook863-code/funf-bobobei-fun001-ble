@@ -16,7 +16,7 @@ def nonzero_bench_allowed():
 def live_nonzero_allowed():
     # Live commands require a local owner grant or standing permission.
     # Software watchdogs depend on a working process and BLE link.
-    # Hardware disconnect-stop limitations are documented in SAFETY.md.
+    # Hardware disconnect-stop limitations are documented in docs/SAFETY.md.
     return True
 
 

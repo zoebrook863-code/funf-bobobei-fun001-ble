@@ -486,7 +486,7 @@ def owner_console():
                     state.stop_current()
                 elif command == 'functions':
                     print('功能 vibration（震动）、suction（吸吮）、electric（App 标为 Soda current）。')
-                    print('模式编号1-4，强度编码0-100。单台实测限模式1/值1的吸吮、震动与一次组合，详见 SAFETY.md。')
+                    print('模式编号1-4，强度编码0-100。单台实测限模式1/值1的吸吮、震动与一次组合，详见 docs/SAFETY.md。')
                     for code, name in MODE_NAMES.items():
                         print(f'模式 {code}：{name}')
                 elif command != 'status':

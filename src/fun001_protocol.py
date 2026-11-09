@@ -1,6 +1,6 @@
-"""Offline FUN-001 encoding from APK 3.0.7 and owner-provided captures.
+"""Offline FUN-001 encoding from APK 3.0.7 and authorized-device captures.
 
-Physical acceptance is limited to the cases documented in SAFETY.md.
+Physical acceptance is limited to the cases documented in docs/SAFETY.md.
 """
 import secrets
 

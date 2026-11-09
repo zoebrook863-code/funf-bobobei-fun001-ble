@@ -125,7 +125,7 @@ quit
 
 - FUNF Pro 中继架构、授权与停止流程的参考来源。[zaoan0/funf-pro-relay](https://github.com/zaoan0/funf-pro-relay)
 - SVAKOM BLE 逆向与本机 Python 中继方法的参考来源。[vickyldr/svakom-ble-ai](https://github.com/vickyldr/svakom-ble-ai)
-- 本地开发阶段检阅的 SVAKOM 控制示例，其 README 同时引用了上一项目。[daningzi50-hub/svakom-sl278h-ble](https://github.com/daningzi50-hub/svakom-sl278h-ble)
+- SVAKOM 控制示例，其 README 同时引用了上一项目。[daningzi50-hub/svakom-sl278h-ble](https://github.com/daningzi50-hub/svakom-sl278h-ble)
 
 本项目面向 FUN-001 非 Pro，协议编码依据该型号的本地 App 与通信证据复核，详见[协议说明](docs/PROTOCOL.md)。参考范围和许可记录见[第三方说明](docs/THIRD_PARTY_NOTICES.md)。
 

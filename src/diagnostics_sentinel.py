@@ -1,6 +1,6 @@
 """Sentinel feasibility test: one stop frame, no nonzero command.
 
-Phase-one step five from STOP_GUARANTEE_DIAGNOSIS_2026-11-08.md:
+Reviewed phase-one sentinel feasibility procedure.
 
 1. a primary child connects and holds the device;
 2. the parent opens a second application session to the same device;

@@ -24,7 +24,7 @@ from local_runtime import RuntimeLock, read_secret, secure_directory, write_priv
 RUNTIME = Path(__file__).resolve().parents[1] / 'private' / 'http-mcp'
 CREDENTIAL = 'FUN001_HTTP_TOKEN'
 PORT = 8769
-HOSTS = ('127.0.0.1:8769', '127.0.0.1:18769')
+HOSTS = ('127.0.0.1:8769', '127.0.0.1:38473')
 PING_INTERVAL = 0.5
 PING_TIMEOUT = 1.5
 REQUEST_CANCEL = ContextVar('fun001_http_cancel', default=None)
